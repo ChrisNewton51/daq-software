@@ -1,0 +1,36 @@
+{
+  "name": "daq-software",
+  "version": "1.0.0",
+  "description": "Software for a data aquisition unit",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"DAQ Software\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisNewton51/daq-software.git"
+  },
+  "keywords": [
+    "daq",
+    "data",
+    "electron",
+    "current",
+    "voltage",
+    "capacitance",
+    "tesla",
+    "capacitance",
+    "inductance"
+  ],
+  "author": "Chris Newton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisNewton51/daq-software/issues"
+  },
+  "homepage": "https://github.com/ChrisNewton51/daq-software#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "electron": "^15.2.0",
+    "electron-packager": "^15.4.0"
+  }
+}
