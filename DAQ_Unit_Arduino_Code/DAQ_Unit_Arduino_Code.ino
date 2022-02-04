@@ -57,8 +57,6 @@ void setup() {
 
 void loop() {
   Button_State = digitalRead(buttonPin); //read the value of the button
-
-  //delay(1000);
   
   if(Button_State == HIGH) //if the button is pushed
   {
@@ -212,12 +210,4 @@ void loop() {
       break;
   }
   
-  
-  
-  
-  
-  
-  
-    
-
 }
