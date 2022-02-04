@@ -2,15 +2,49 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-        <title>Hello World!</title>
+        <title>DAQ Software</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://kit.fontawesome.com/c4d3c9f7db.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="extras.js"></script>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
+        <header id="main-head">
+            <div class="f-center head-buttons">
+                <i class="fas fa-play" style="color: #00B726"></i>
+                <i class="fas fa-pause" style="color: #000000"></i>
+                <i class="fas fa-stop" style="color: #F80000"></i>
+            </div>
+            <a href="popout.html" target="_blank"><i id="popout" class="fas fa-share-square" style="color: #000000"></i></a>
+        </header>
+        <div id="content">
+            <div class="home-sec f-center">
+                <div class="sec-2" id="voltage">
+                    <h2>Voltage</h2>
+                    <img src="images/Voltage.png" class="img-2" />
+                </div>
+                <div class="sec-2">
+                    <h2>Current</h2>
+                    <img src="images/Current.png" class="img-2" />
+                </div>
+            </div>
+            <div class="home-sec f-center">
+                <div class="sec-3">
+                    <h2>Capacitance</h2>
+                    <img src="images/Capacitance.png" class="img-3" />
+                </div>
+                <div class="sec-3">
+                    <h2>Magnetic Field Strength</h2>
+                    <img src="images/Magnetic Field Strength.png" class="img-3" />
+                </div>
+                <div class="sec-3">
+                    <h2>Inductance</h2>
+                    <img src="images/Inductance.png" class="img-3" />
+                </div>
+            </div>
+        </div>
     </body>
 </html>

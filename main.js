@@ -9,11 +9,11 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
   win.loadFile('index.html')
 }
 
 app.whenReady().then(() => {
+  
   createWindow()
 
   app.on('activate', () => {
@@ -28,3 +28,4 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+

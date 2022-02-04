@@ -1,0 +1,87 @@
+/**
+ *
+ * This is the main stylesheet for the DAQ Unit software
+ *
+ */
+
+/* General */
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.f-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header */
+#main-head {
+    display: flex;
+    height: 65px;
+    box-shadow: 5px 0px 10px rgba(0,0,0,0.3);
+    align-items: center;
+}   
+.head-buttons {
+    width: 100%;
+}
+.head-buttons i{
+    padding: 0 10px;
+}
+#popout { 
+    position: relative;
+    right: 70px;
+}
+
+/* Home Page */
+.sec-2 {
+    margin: 0 20px;
+}
+.sec-3 {
+    margin: 0 15px;
+}
+.sec-2 h2, .sec-3 h2 {
+    font-size: 16px;
+    text-align: center;
+}
+.home-sec {
+    margin-top: 20px
+}
+
+/* Popout Page */
+#popout-header h1 {
+    text-align: center;
+    margin-bottom: 0;
+    color: #292A2D;
+    margin-top: 15px;
+    font-size: 1.7em;
+}
+.popout p { 
+    text-align: center;
+    color: #5c5c5c;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+.popout { flex-direction: column;}
+#current {
+    margin-top: 0;
+    width: 50px;
+    padding: 8px 12px;
+    border: 1px solid rgba(88, 88, 88, 0.541);
+    border-radius: 7px;
+}
+.back {
+    position: absolute;
+    left: 40px;
+    text-decoration: none;
+}
+.back i {
+    padding-right: 10px;
+}
+.back i, .back p {
+    color: #000;
+}
+.full {
+    width: 670px;
+    margin: auto;
+}
