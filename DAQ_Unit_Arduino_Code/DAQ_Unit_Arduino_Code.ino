@@ -79,7 +79,7 @@ void loop() {
         VoltageReading = VoltageValue * (5.17/1024)*((R1 + R2)/R2);
         Serial.print("Volt "); //display the mode code to the software
         Serial.println(VoltageReading); //sending the value of the sensor reading
-        delay(500);
+        //delay(500);
         
         //Display on the LCD
         lcd.setCursor(0,0); // set cursor to 1 symbol of 1 line
@@ -96,14 +96,14 @@ void loop() {
         { //Get 150 samples
         AcsValue = analogRead(A0);     //Read current sensor values   
         Samples = Samples + AcsValue;  //Add samples together
-        delay (3); // let ADC settle before next sample 3ms
+        //delay (3); // let ADC settle before next sample 3ms
         }
         
         AvgAcs=Samples/150.0;//Taking Average of Samples
         AcsValueF = (AvgAcs * (5.0 / 1024.0));
         Serial.print("Cur "); //display the mode code to the software
         Serial.println(AcsValueF);//Print the read current on Serial monitor
-        delay(50);
+        //delay(50);
 
         //Display on the LCD
         lcd.setCursor(0,0); // set cursor to 1 symbol of 1 line
@@ -152,7 +152,7 @@ void loop() {
         lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line 
         lcd.print ((long)nanoFarads);
         lcd.print (" nanoFarads");           
-        delay(500); 
+        //delay(500); 
       }
     
       digitalWrite(chargePin, LOW); // Stops charging capacitor
@@ -171,9 +171,8 @@ void loop() {
       lcd.setCursor(0, 0);
       lcd.print("Inductance Mode");
       digitalWrite(6, HIGH);
-      delay(5);//give some time to charge inductor.
+      //delay(5);//give some time to charge inductor.
       digitalWrite(6, LOW);
-      delayMicroseconds(100); //make sure resination is measured
       pulse = pulseIn(5, HIGH, 5000);//returns 0 if timeout
       
       if(pulse > 0.1)
@@ -185,12 +184,12 @@ void loop() {
         //Serial print
         Serial.print("Ind ");
         Serial.println( inductance );
-        delay(10);
+        //delay(10);
         //LCD print
         lcd.setCursor(0, 1);
         lcd.print(inductance);
 
-        delay(10);
+        //delay(10);
       }
 
       break;
