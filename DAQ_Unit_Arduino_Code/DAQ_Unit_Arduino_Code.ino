@@ -49,7 +49,7 @@ void setup() {
   //Button Setup
   pinMode(buttonPin,INPUT);
   //setting up the LCD screen
-  Serial.begin(9600);
+  Serial.begin(115000);
   lcd.init();
   lcd.backlight();
 
@@ -168,6 +168,8 @@ void loop() {
 
       break;
     case 4: //inductance case
+      lcd.setCursor(0, 0);
+      lcd.print("Inductance Mode");
       digitalWrite(6, HIGH);
       delay(5);//give some time to charge inductor.
       digitalWrite(6, LOW);
@@ -185,9 +187,6 @@ void loop() {
         Serial.println( inductance );
         delay(10);
         //LCD print
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Inductance: uH");
         lcd.setCursor(0, 1);
         lcd.print(inductance);
 
@@ -196,6 +195,8 @@ void loop() {
 
       break;
     case 5: //magnetic field case -------------------------------------------------------------- need work
+      lcd.setCursor(0, 0);
+      lcd.print("Magnetic Field Mode");
       rawvalue = analogRead(A0);
       //Serial.println(rawvalue);
 
