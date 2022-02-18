@@ -15,7 +15,7 @@ float AcsValue,Samples,AvgAcs,AcsValueF;
 
 //Capacitance Declarations
 int analogPin = 1;
-int chargePin = 12; 
+int chargePin = 13; //changed this ------------------------------------------------------------- should be 12
 int dischargePin = 11;
 int R3 = 10000;
 
@@ -30,6 +30,7 @@ double pulse, frequency, capacitance, inductance, inductance_mH;
 
 //Magnetic Field Declarations
 int rawvalue;
+float Gval;
 
 //LCD Declarations
 LiquidCrystal_I2C lcd(0x27,20,4); //LCD setup of 20 chars by 4 lines
@@ -78,7 +79,7 @@ void loop() {
   {
     case 1: //voltage case
         VoltageValue = analogRead(A0);
-        VoltageReading = VoltageValue * (5.17/1024)*((R1 + R2)/R2);
+        VoltageReading = VoltageValue * (4.69/1024)*((R1 + R2)/R2);
         Serial.print("Volt "); //display the mode code to the software
         Serial.println(VoltageReading); //sending the value of the sensor reading
         //delay(500);
@@ -104,7 +105,8 @@ void loop() {
         }
         
         AvgAcs=Samples/150.0;//Taking Average of Samples
-        AcsValueF = (AvgAcs * (5.0 / 1024.0));
+        //AcsValueF = 512 - (AvgAcs*0.0265);
+        AcsValueF = ((AvgAcs * (5.0 / 1024.0) - 2.5)*-5.5);
         Serial.print("Cur "); //display the mode code to the software
         Serial.println(AcsValueF);//Print the read current on Serial monitor
         //delay(50);
@@ -112,7 +114,8 @@ void loop() {
         //Display on the LCD
         lcd.setCursor(0,0); // set cursor to 1 symbol of 1 line
         lcd.print("Current");
-        lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line
+        lcd.setCursor(1,1); // set cursor to 1 symbol of 2 line
+        //lcd.print(AvgAcs); 
         lcd.print(AcsValueF); 
         lcd.print(" A");
 
@@ -177,10 +180,11 @@ void loop() {
       lcd.setCursor(0, 0);
       lcd.print("Inductance Mode");
       digitalWrite(6, HIGH);
-      //delay(5);//give some time to charge inductor.
+      delay(5);//give some time to charge inductor.
       digitalWrite(6, LOW);
       pulse = pulseIn(5, HIGH, 5000);//returns 0 if timeout
-      
+
+      Serial.println(pulse);
       if(pulse > 0.1)
       { //if a timeout did not occur and it took a reading:
         capacitance = 2.E-7; // <- insert value here
@@ -200,16 +204,18 @@ void loop() {
 
       delay(50);
       break;
-    case 5: //magnetic field case -------------------------------------------------------------- need work
+    case 5: //magnetic field case 
       lcd.setCursor(0, 0);
       lcd.print("Magnetic Field");
-      rawvalue = analogRead(A0);
-      //Serial.println(rawvalue);
+      rawvalue = analogRead(A2);
 
-      //need to do a conversion here
-      
-      //String ADCVALUE = String((analogRead(A0)-569)/0.376);
-      //ADCVALUE.toCharArray(ADCSHOW,5);
+      Gval = 436.65 - (rawvalue*2.13);
+
+      Serial.print("Mag Field ");
+      Serial.println(Gval);
+      lcd.setCursor(0,1);
+      lcd.print(Gval);
+
       delay(50);
       break;
     default: 
