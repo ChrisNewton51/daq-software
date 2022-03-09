@@ -22,30 +22,46 @@ body {
     box-shadow: 5px 0px 10px rgba(0,0,0,0.3);
     align-items: center;
 }   
-.head-buttons {
-    width: 100%;
-}
-.head-buttons i{
-    padding: 0 10px;
-}
+.head-buttons {width: 100%;}
+.head-buttons i {padding: 0 10px;}
 #popout { 
     position: relative;
     right: 70px;
 }
 
 /* Home Page */
-.sec-2 {
-    margin: 0 20px;
+.sec-2 { 
+    margin: 10px 20px;
+    width: 50%;
+    border: 2px solid #ddd;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.05);
+    padding: 15px 0;
 }
-.sec-3 {
-    margin: 0 15px;
+.sec-3 { 
+    margin: 10px 15px;
+    width: 33%;
+    border: 2px solid #ddd;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.05);
+    padding: 15px 0;
 }
 .sec-2 h2, .sec-3 h2 {
-    font-size: 16px;
+    font-size: 19px;
     text-align: center;
 }
-.home-sec {
-    margin-top: 20px
+.home-sec { margin-top: 20px}
+.home-sec div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home-sec p {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 22px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
 }
 
 /* Popout Page */
@@ -63,7 +79,7 @@ body {
     margin: 10px 0;
 }
 .popout { flex-direction: column;}
-#current {
+#value {
     margin-top: 0;
     width: 50px;
     padding: 8px 12px;
@@ -75,13 +91,10 @@ body {
     left: 40px;
     text-decoration: none;
 }
-.back i {
-    padding-right: 10px;
-}
-.back i, .back p {
-    color: #000;
-}
+.back i {padding-right: 10px;}
+.back i, .back p {color: #000;}
 .full {
     width: 670px;
     margin: auto;
 }
+#chart {padding: 2rem;}
