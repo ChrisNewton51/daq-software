@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>window.$ = window.jQuery = require('jquery');</script>
         <script src="extras.js"></script>
     </head>
     <body>
@@ -24,25 +25,30 @@
             <div class="home-sec f-center">
                 <div class="sec-2" id="voltage">
                     <h2>Voltage</h2>
-                    <img src="images/Voltage.png" class="img-2" />
+                    <p id="voltval">0.00 V</p>
+                    <!--<img src="images/Voltage.png" class="img-2" />-->
                 </div>
-                <div class="sec-2">
+                <div class="sec-2" id="current">
                     <h2>Current</h2>
-                    <img src="images/Current.png" class="img-2" />
+                    <p id="currentval">0.00 A</p>
+                    <!--<img src="images/Current.png" class="img-2" />-->
                 </div>
             </div>
             <div class="home-sec f-center">
                 <div class="sec-3">
                     <h2>Capacitance</h2>
-                    <img src="images/Capacitance.png" class="img-3" />
+                    <p id="capval">0.00 nF</p>
+                    <!--<img src="images/Capacitance.png" class="img-3" />-->
                 </div>
                 <div class="sec-3">
                     <h2>Magnetic Field Strength</h2>
-                    <img src="images/Magnetic Field Strength.png" class="img-3" />
+                    <p id="magval">0.00 T</p>
+                    <!--<img src="images/Magnetic Field Strength.png" class="img-3" />-->
                 </div>
                 <div class="sec-3">
                     <h2>Inductance</h2>
-                    <img src="images/Inductance.png" class="img-3" />
+                    <p id="indval">0.00 uH</p>
+                    <!--<img src="images/Inductance.png" class="img-3" />-->
                 </div>
             </div>
         </div>

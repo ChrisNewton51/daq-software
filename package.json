@@ -39,7 +39,10 @@
     "electron": "^15.2.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "chart.js": "^3.7.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.6.0",
+    "serialport": "^10.4.0"
   },
   "config": {
     "forge": {
