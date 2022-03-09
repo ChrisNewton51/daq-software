@@ -45,8 +45,8 @@ void setup() {
   pinMode(chargePin, OUTPUT);     
   digitalWrite(chargePin, LOW); 
   //Setting up inductance
-  pinMode(11, INPUT);
-  pinMode(13, OUTPUT);
+  pinMode(5, INPUT);
+  pinMode(6, OUTPUT);
   //Button Setup
   pinMode(buttonPin,INPUT);
   //setting up the LCD screen
@@ -177,11 +177,11 @@ void loop() {
       delay(50);
       break;
     case 4: //inductance case
-      digitalWrite(13, HIGH);
+      digitalWrite(6, HIGH);
       delay(5);//give some time to charge inductor.
-      digitalWrite(13,LOW);
+      digitalWrite(6,LOW);
       delayMicroseconds(100); //make sure resination is measured
-      pulse = pulseIn(11,HIGH,5000);//returns 0 if timeout
+      pulse = pulseIn(5,HIGH,5000);//returns 0 if timeout
       if(pulse > 0.1){ //if a timeout did not occur and it took a reading:
         
         
