@@ -229,6 +229,8 @@ void loop() {
       delay(50);
       break;
     default: 
+      Serial.print("1 ");
+      Serial.println(random(0.00,1.00));
       break;
   }
   
