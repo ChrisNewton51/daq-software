@@ -98,3 +98,34 @@ body {
     margin: auto;
 }
 #chart {padding: 2rem;}
+.clear {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+}
+.button {
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    color: #000;
+}
+.record {
+    position: absolute;
+    left: 40px;
+}
+#data {
+    position: absolute;
+    left: 175px;
+    top: 7px;
+}
+#notice {text-align: center;}
+.head-buttons svg {
+    display: block;
+    width: 17px;
+    height: auto;
+    fill: #00A8FF;
+    margin-left: 8px;
+}

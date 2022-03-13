@@ -8,7 +8,7 @@
 
         // Variable Definitions
         const port = new SerialPort({
-            path:'COM4',
+            path:'COM5',
             baudRate:115200,
             parser: new ReadlineParser("\n")
         });
@@ -18,7 +18,8 @@
         var dataArray = [];
         var xAxis = [];
         var i = 0;
-        var number, ctx, chart;
+        var index = 0;
+        var number, ctx, chart, reset;
 
         ctx = document.getElementById('chart').getContext('2d');
         
@@ -62,13 +63,58 @@
 
         // Read data realtime
         parser.on('data', data => {
+            if(reset) {
+                dataArray = [];
+                xAxis = [];
+                i = 0;
+                index = 0;
+                reset = false;
+                chart.destroy();
+                chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+        
+                    // The data for our dataset
+                    data: {
+                        labels: xAxis,
+                        datasets: [{
+                            fill: false,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(0,168,255,0.4)",
+                            borderColor: "rgba(0,168,255,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(0,168,255,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(0,168,255,1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: dataArray,
+                            spanGaps: false,
+                        }]
+                    },
+                    // Configuration options go here
+                    options: {}
+                });
+            }
             selector = data.substring(0,1);
-            i++;
-            xAxis[i] = i;
-            console.log(xAxis);
+            
+            xAxis[index] = i;
+            /*\\if (index > 20) {
+                xAxis.shift();
+                dataArray.shift();
+                dataArray[index] = number;
+            }*/
             number = Number(data.substring(1))
-            dataArray[i] = number;
+            dataArray[index] = number;
             chart.update();
+            console.log(xAxis)
 
             $("#value").text(data.substring(1) + "uF");
             switch (Number(selector)) {
@@ -90,6 +136,9 @@
                 default:
                     break;
             }
+
+            i++;
+            index++;
         });
 
         document.getElementById("back").addEventListener("click", () => {
@@ -101,6 +150,10 @@
             });
             ipcRenderer.send('request-port-open', Data);
         }, false);
+
+        $("#clear").on('click', function() {
+            reset = true;
+        })
 
     });
 })( jQuery );

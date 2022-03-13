@@ -40,8 +40,13 @@
   },
   "dependencies": {
     "chart.js": "^3.7.1",
+    "csv-parser": "^3.0.0",
+    "csv-write-stream": "^2.0.0",
+    "csv-writer": "^1.6.0",
     "electron-squirrel-startup": "^1.0.0",
+    "fs": "0.0.1-security",
     "jquery": "^3.6.0",
+    "remote": "^0.2.6",
     "serialport": "^10.4.0"
   },
   "config": {
