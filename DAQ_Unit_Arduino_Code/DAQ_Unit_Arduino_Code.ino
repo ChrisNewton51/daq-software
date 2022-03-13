@@ -15,7 +15,7 @@ float AcsValue,Samples,AvgAcs,AcsValueF;
 
 //Capacitance Declarations
 int analogPin = 1;
-int chargePin = 13; 
+int chargePin = 13; //changed this ------------------------------------------------------------- should be 12
 int dischargePin = 11;
 int R3 = 10000;
 
@@ -67,11 +67,13 @@ void loop() {
     {
       lcd.clear();
       button_value = 1; //reset the button value to 1
+      delay(150);
     }
     else //if the button value is 1-4
     {
       lcd.clear();
       button_value = button_value +1; //increment the value of the button by 1
+      delay(150);
     }
   }
   
@@ -91,14 +93,13 @@ void loop() {
         //lcd.print("Voltage: ");
         lcd.print(VoltageReading); 
         lcd.print(" V");
-        delay(50);
         break;
     case 2: //current case
         AcsValue=0.0,Samples=0.0,AvgAcs=0.0,AcsValueF=0.0; //reseting to 0.0
   
         for (int x = 0; x < 150; x++)
         { //Get 150 samples
-        AcsValue = analogRead(A0);     //Read current sensor values   
+        AcsValue = analogRead(A3);     //Read current sensor values   
         Samples = Samples + AcsValue;  //Add samples together
         //delay (3); // let ADC settle before next sample 3ms
         }
@@ -111,11 +112,13 @@ void loop() {
 
         //Display on the LCD
         lcd.setCursor(0,0); // set cursor to 1 symbol of 1 line
-        lcd.print("Current Mode");
-        lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line
-        //lcd.print("Current: ");
+        lcd.print("Current");
+        lcd.setCursor(1,1); // set cursor to 1 symbol of 2 line
+        //lcd.print(AvgAcs); 
         lcd.print(AcsValueF); 
+        lcd.print(" A");
 
+        delay(50);
         break;
     case 3: //capacitance case
       digitalWrite(chargePin, HIGH); // Begins charging the capacitor
@@ -203,6 +206,7 @@ void loop() {
         delay(10);
       }
 
+      delay(50);
       break;
     case 5: //magnetic field case    
       lcd.setCursor(0, 0);
@@ -217,6 +221,12 @@ void loop() {
       lcd.setCursor(0,1);
       lcd.print(Tval);
 
+      Serial.print("Mag Field ");
+      Serial.println(Gval);
+      lcd.setCursor(0,1);
+      lcd.print(Gval);
+
+      delay(50);
       break;
     default: 
       Serial.print("1 ");
