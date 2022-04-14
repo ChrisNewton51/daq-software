@@ -1,0 +1,175 @@
+/**
+ *
+ * This is the main stylesheet for the DAQ Unit software
+ *
+ */
+
+/* General */
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.f-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header */
+#main-head {
+    display: flex;
+    height: 65px;
+    box-shadow: 5px 0px 10px rgba(0,0,0,0.3);
+    align-items: center;
+}   
+.head-buttons {width: 100%;}
+.head-buttons i {padding: 0 10px;}
+#popout { 
+    position: relative;
+    right: 70px;
+}
+
+/* Home Page */
+.sec-2 { 
+    margin: 10px 20px;
+    width: 50%;
+    border: 2px solid #ddd;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.05);
+    padding: 15px 0;
+}
+.sec-3 { 
+    margin: 10px 15px;
+    width: 33%;
+    border: 2px solid #ddd;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.05);
+    padding: 15px 0;
+}
+.sec-2 h2, .sec-3 h2 {
+    font-size: 19px;
+    text-align: center;
+}
+.home-sec { margin-top: 20px}
+.home-sec div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home-sec p {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 22px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
+
+/* Popout Page */
+#popout-header h1 {
+    text-align: center;
+    margin-bottom: 0;
+    color: #292A2D;
+    margin-top: 15px;
+    font-size: 1.7em;
+}
+.popout p { 
+    text-align: center;
+    color: #5c5c5c;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+.popout { flex-direction: column;}
+#value {
+    margin-top: 0;
+    min-width: 50px;
+    padding: 8px 12px;
+    border: 1px solid rgba(88, 88, 88, 0.541);
+    border-radius: 7px;
+}
+.back {
+    position: absolute;
+    left: 40px;
+    text-decoration: none;
+}
+.back i {padding-right: 10px;}
+.back i, .back p {color: #000;}
+.full {
+    width: 670px;
+    margin: auto;
+}
+#chart {padding: 2rem;}
+.clear {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+}
+.button {
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    color: #000;
+}
+.record {
+    position: absolute;
+    left: 40px;
+}
+#data {
+    position: absolute;
+    left: 175px;
+    top: 7px;
+}
+#notice {text-align: center;}
+.head-buttons svg {
+    display: block;
+    width: 17px;
+    height: auto;
+    fill: #00A8FF;
+    margin-left: 8px;
+}
+#play:hover {cursor: pointer;}
+
+/* Port Select Popup */
+#port-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    margin: 0;
+    padding: 0;
+}
+#port-notice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 7px;
+}
+#label {
+    text-align: center;
+    color: #333;
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+#select-port{
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    padding: 5px 12px;
+}
+#submit-select{
+    padding: 7px 15px;
+    border-radius: 7px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 1rem;
+}

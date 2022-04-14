@@ -1,0 +1,6 @@
+{
+    "port": "COM4",
+    "board": "arduino:avr:uno",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "DAQ_Unit_Arduino_Code\\DAQ_Unit_Arduino_Code.ino"
+}
