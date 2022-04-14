@@ -15,7 +15,7 @@ float AcsValue,Samples,AvgAcs,AcsValueF;
 
 //Capacitance Declarations
 int analogPin = 1;
-int chargePin = 13; //changed this ------------------------------------------------------------- should be 12
+int chargePin = 12; //changed this ------------------------------------------------------------- should be 12
 int dischargePin = 11;
 int R3 = 10000;
 
@@ -46,8 +46,8 @@ void setup() {
   pinMode(chargePin, OUTPUT);     
   digitalWrite(chargePin, LOW); 
   //Setting up inductance
-  pinMode(5, INPUT); //Input from the comparator output
-  pinMode(6, OUTPUT);//output through a 150 ohm resistor to thr LC circuit
+  pinMode(6, INPUT); //Input from the comparator output
+  pinMode(5, OUTPUT);//output through a 150 ohm resistor to thr LC circuit
   //Button Setup
   pinMode(buttonPin,INPUT);
   //setting up the LCD screen
@@ -63,6 +63,7 @@ void loop() {
   
   if(Button_State == HIGH) //if the button is pushed
   {
+    Serial.println("switch");
     if(button_value == 5) //if the current value of the button is 5 then reset to 1
     {
       lcd.clear();
@@ -81,7 +82,7 @@ void loop() {
   {
     case 1: //voltage case
         VoltageValue = analogRead(A0);
-        VoltageReading = VoltageValue * (4.69/1024)*((R1 + R2)/R2);
+        VoltageReading = VoltageValue * (4.59/1024)*((R1 + R2)/R2);
         Serial.print("1 "); //display the mode code to the software
         Serial.println(VoltageReading); //sending the value of the sensor reading
         //delay(500);
@@ -92,20 +93,21 @@ void loop() {
         lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line
         //lcd.print("Voltage: ");
         lcd.print(VoltageReading); 
-        lcd.print(" V");
+        lcd.print(" V  ");
         break;
     case 2: //current case
         AcsValue=0.0,Samples=0.0,AvgAcs=0.0,AcsValueF=0.0; //reseting to 0.0
-  
+
         for (int x = 0; x < 150; x++)
         { //Get 150 samples
-        AcsValue = analogRead(A3);     //Read current sensor values   
+        AcsValue = analogRead(A3);     //Read current sensor values
         Samples = Samples + AcsValue;  //Add samples together
         //delay (3); // let ADC settle before next sample 3ms
         }
-        
+
         AvgAcs=Samples/150.0;//Taking Average of Samples
-        AcsValueF = -(AvgAcs * (5.0 / 1024.0));
+        //AcsValueF = 512 - (AvgAcs*0.0265);
+        AcsValueF = -((AvgAcs * (5.0 / 1024.0) - 2.5)*-5.5);
         Serial.print("2 "); //display the mode code to the software
         Serial.println(AcsValueF);//Print the read current on Serial monitor
         //delay(50);
@@ -116,7 +118,7 @@ void loop() {
         lcd.setCursor(1,1); // set cursor to 1 symbol of 2 line
         //lcd.print(AvgAcs); 
         lcd.print(AcsValueF); 
-        lcd.print(" A");
+        lcd.print(" A      ");
 
         delay(50);
         break;
@@ -140,14 +142,14 @@ void loop() {
       //lcd.print(" mS   "); 
              
     
-      if (microFarads > 1) // Determines if units should be micro or nano and prints accordingly
+      if (microFarads >= 1) // Determines if units should be micro or nano and prints accordingly
       {
         Serial.print("3 ");
         Serial.print((long)microFarads);       
-        Serial.println(" mF"); 
+        Serial.println(" uF"); 
         lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line 
         lcd.print ((long)microFarads);
-        lcd.print (" microFarads");       
+        lcd.print (" microFarads  ");       
       }
     
       else
@@ -158,7 +160,7 @@ void loop() {
         Serial.println(" nF");
         lcd.setCursor(0,1); // set cursor to 1 symbol of 2 line 
         lcd.print ((long)nanoFarads);
-        lcd.print (" nanoFarads");           
+        lcd.print (" nanoFarads  ");           
         //delay(500); 
       }
     
@@ -176,11 +178,15 @@ void loop() {
       delay(50);
       break;
     case 4: //inductance case
-      digitalWrite(6, HIGH);
+      digitalWrite(5, HIGH);
       delay(5);//give some time to charge inductor.
-      digitalWrite(6,LOW);
+      digitalWrite(5,LOW);
       delayMicroseconds(100); //make sure resination is measured
-      pulse = pulseIn(5,HIGH,5000);//returns 0 if timeout
+      pulse = pulseIn(6,HIGH,5000);//returns 0 if timeout
+      
+      lcd.setCursor(0,0); 
+      lcd.print("Inductance:");
+
       if(pulse > 0.1){ //if a timeout did not occur and it took a reading:
         
         
@@ -189,24 +195,24 @@ void loop() {
         
         frequency = 1.E6/(2*pulse);
         inductance = 1./(capacitance*frequency*frequency*4.*3.14159*3.14159);//one of my profs told me just do squares like this
-        inductance *= 1E6; //note that this is the same as saying inductance = inductance*1E6
-      
-        //Serial print
-        Serial.print("\tinductance uH:");
+        inductance *= 1E3; //note that this is the same as saying inductance = inductance*1E6
+        
+        Serial.print("4 ");
         Serial.println( inductance );
         delay(10);
       
         //LCD print
-        lcd.setCursor(0,0); 
-        lcd.print("Inductance:");
         lcd.setCursor(0,1); 
         lcd.print(inductance);
-        lcd.setCursor(14,1); 
-        lcd.print("uH");          
+        lcd.print(" mH    ");
+        //lcd.setCursor(14,1); 
+        //lcd.print("uH");          
         delay(10);
+      } else {
+        Serial.println("4 ");
       }
 
-      delay(50);
+      
       break;
     case 5: //magnetic field case    
       lcd.setCursor(0, 0);
@@ -214,17 +220,16 @@ void loop() {
       rawvalue = analogRead(A2);
 
       Gval = 436.65 - (rawvalue*2.13);
-      Tval = Gval/10000;
+      Tval = Gval/1000;
 
       Serial.print("5 ");
       Serial.println(Tval);
       lcd.setCursor(0,1);
-      lcd.print(Tval);
-
-      Serial.print("Mag Field ");
-      Serial.println(Gval);
-      lcd.setCursor(0,1);
       lcd.print(Gval);
+      lcd.print(" Gauss       ");
+      lcd.setCursor(0,2);
+      lcd.print(Tval);
+      lcd.print(" mT      ");
 
       delay(50);
       break;

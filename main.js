@@ -13,7 +13,7 @@ function createWindow () {
       enableRemoteModule: true,
     }
   })
-  win.loadFile('index.html')
+  win.loadFile('index.html');
 
   ipcMain.on('request-port-open', (event, arg) => {
     // Request to update the label in the renderer process of the second window
@@ -37,4 +37,8 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+ipcMain.on( "setPort", ( event, globalPort ) => {
+  global.port = globalPort;
+} );
 

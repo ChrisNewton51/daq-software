@@ -1,14 +1,18 @@
+// Require Statements
+const { SerialPort } = require('serialport')
+const { ReadlineParser } = require('@serialport/parser-readline');
+const { ipcRenderer } = require('electron');
+const remote = require('electron').remote;
+var Chart = require('chart.js');
+
+
 (function($) {
     $(document).ready(function() {
-        // Require Statements
-        const { SerialPort } = require('serialport')
-        const { ReadlineParser } = require('@serialport/parser-readline');
-        const { ipcRenderer } = require('electron');
-        var Chart = require('chart.js');
+        console.log(remote.getGlobal( "port" ));
 
         // Variable Definitions
         const port = new SerialPort({
-            path:'COM5',
+            path:remote.getGlobal( "port" ),
             baudRate:115200,
             parser: new ReadlineParser("\n")
         });
@@ -53,7 +57,13 @@
                 }]
             },
             // Configuration options go here
-            options: {}
+            options: {
+                plugins:{   
+                    legend: {
+                        display: false
+                    },
+                }    
+            }
         });
 
         // Open Serial Port
@@ -61,8 +71,14 @@
             console.log('serial port open');
         });
 
+        var switchG;
+
         // Read data realtime
         parser.on('data', data => {
+            if (data.trim() == "switch") {
+                reset = true;
+            }
+
             if(reset) {
                 dataArray = [];
                 xAxis = [];
@@ -100,7 +116,13 @@
                         }]
                     },
                     // Configuration options go here
-                    options: {}
+                    options: {
+                        plugins:{   
+                            legend: {
+                                display: false
+                            },
+                        }    
+                    }
                 });
             }
             selector = data.substring(0,1);
@@ -111,27 +133,41 @@
                 dataArray.shift();
                 dataArray[index] = number;
             }*/
-            number = Number(data.substring(1))
-            dataArray[index] = number;
             chart.update();
-            console.log(xAxis)
 
             $("#value").text(data.substring(1) + "uF");
             switch (Number(selector)) {
                 case 1:
+                    number = Number(data.substring(1))
+                    dataArray[index] = number;
                     $("#value").text(data.substring(1) + "V");
+                    $("#title").text("Voltage");
                     break;
                 case 2:
+                    number = Number(data.substring(1))
+                    dataArray[index] = number;
                     $("#value").text(data.substring(1) + "A");
+                    $("#title").text("Current");
                     break;
                 case 3:
-                    $("#value").text(data.substring(1) + "nF");
+                    var capVal = data.substring(1);
+                    capVal = capVal.slice(0,-4);
+                    number = Number(capVal)
+                    dataArray[index] = number;
+                    $("#value").text(data.substring(1));
+                    $("#title").text("Capacitance");
                     break;
                 case 4:
-                    $("#value").text(data.substring(1) + "H");
+                    number = Number(data.substring(1))
+                    dataArray[index] = number;
+                    $("#value").text(data.substring(1) + "mH");
+                    $("#title").text("Inductance");
                     break;
                 case 5:
-                    $("#value").text(data.substring(1) + "T");
+                    number = Number(data.substring(1))
+                    dataArray[index] = number;
+                    $("#value").text(data.substring(1) + "mT");
+                    $("#title").text("Magnetic Field");
                     break;
                 default:
                     break;
