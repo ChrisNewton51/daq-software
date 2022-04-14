@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron');
 const remote = require('electron').remote;
 const dialog = remote.require('electron').dialog;
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-
+var recordData = false;
 (function($) {
     $(document).ready(function() {        
         SerialPort.list().then(function(ports){
@@ -104,56 +104,57 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
                     i++;
                 });
+                $("#play").on('click', function() {
+                    let options = {
+                        // See place holder 1 in above image
+                        title : "Select File Location", 
+        
+                        properties: ['openDirectory']
+                    }
+                    var newPath;
+        
+                    dialog.showOpenDialog(options)
+                        .then(filePaths => {
+                            path = String(filePaths.filePaths)
+                            newPath = path.replace("undefined", "")
+                            newPath = newPath + "\\data.csv";
+                            const csvWriter = createCsvWriter({
+                                path: newPath,
+                                header: [
+                                    {id: 'time', title: 'Time'},
+                                    {id: 'value', title: 'Value'},
+                                ]
+                            });
+                    
+                            csvWriter
+                                .writeRecords(record)
+                                .then(()=> console.log('The CSV file was written successfully'));
+        
+                            $("#notice").text("File has been downloaded at " + newPath);
+                        })
+                    
+                });
+                $("#record").on('click', function() {
+                    if (recordData == false) {
+                        recordData = true;
+                        $("#record").text("Stop Recording");
+                    } else {
+                        recordData = false;
+                        $("#record").text("Record Data");
+                    }
+                });
+                $("#restart").on('click', function() {
+                    time = [];
+                    values = [];
+                    record = [];
+                    index = 0;
+                    $("#data").text(values.length + " Data Points");
+                    $("#notice").hide();
+                })
             }
         })   
             
-        $("#play").on('click', function() {
-            let options = {
-                // See place holder 1 in above image
-                title : "Select File Location", 
-
-                properties: ['openDirectory']
-            }
-            var newPath;
-
-            dialog.showOpenDialog(options)
-                .then(filePaths => {
-                    path = String(filePaths.filePaths)
-                    newPath = path.replace("undefined", "")
-                    newPath = newPath + "\\data.csv";
-                    const csvWriter = createCsvWriter({
-                        path: newPath,
-                        header: [
-                            {id: 'time', title: 'Time'},
-                            {id: 'value', title: 'Value'},
-                        ]
-                    });
-            
-                    csvWriter
-                        .writeRecords(record)
-                        .then(()=> console.log('The CSV file was written successfully'));
-
-                    $("#notice").text("File has been downloaded at " + newPath);
-                })
-            
-        });
-        $("#record").on('click', function() {
-            if (recordData == false) {
-                recordData = true;
-                $("#record").text("Stop Recording");
-            } else {
-                recordData = false;
-                $("#record").text("Record Data");
-            }
-        });
-        $("#restart").on('click', function() {
-            time = [];
-            values = [];
-            record = [];
-            index = 0;
-            $("#data").text(values.length + " Data Points");
-            $("#notice").hide();
-        })
+        
         
 
     });
