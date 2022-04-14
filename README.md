@@ -1,4 +1,4 @@
-# daq-software
+# DAQ Software
 Software for a Data Acquisition (DAQ) unit
 
 It takes Voltage, Current, Capcitance, Inductance, and Magnetic Field Strength serial data readings from an Arduino. 
