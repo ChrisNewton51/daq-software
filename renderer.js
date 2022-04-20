@@ -1,4 +1,6 @@
-// electron-packager ./ ics --platform=win32 --arch=x64 --electron-version=8.1.1
+// Windows: electron-packager ./ ics --platform=win32 --arch=x64 --electron-version=8.1.1
+// Mac: electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds
+// Linux: electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --prune=true --out=release-builds
 
 
 // Require Statements
