@@ -54,7 +54,6 @@ void setup() {
   Serial.begin(115200);
   lcd.init();
   lcd.backlight();
-
 }
 
 void loop() {
