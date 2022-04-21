@@ -5,10 +5,12 @@
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
-    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"daq-software\"",
+    "package-win": "electron-packager . daq-software --overwrite --asar --platform=win32 --arch=x64 --icon=assets/icon.ico --prune=true --out=out",
+    "package-linux": "electron-packager . daq-software --icon=assets/icon.png --overwrite --asar --platform=linux --arch=x64 --prune=true --no-sandbox --out=out",
     "package": "electron-forge package",
-    "make": "electron-forge make",
-    "make-mac": "npx @electron-forge/cli make --platform darwin"
+    "make-mac": "npx @electron-forge/cli make --platform darwin",
+    "make-linux": "npx @electron-forge/cli make --platform linux",
+    "make": "npx @electron-forge/cli make"
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,7 @@
     "electron": "^15.2.0"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.8",
     "chart.js": "^3.7.1",
     "csv-parser": "^3.0.0",
     "csv-write-stream": "^2.0.0",
@@ -49,31 +52,30 @@
     "jquery": "^3.6.0",
     "remote": "^0.2.6",
     "serialport": "^10.4.0",
-    "system-sleep": "^1.3.7"
+    "system-sleep": "^1.3.7",
+    "update-electron-app": "^2.0.1"
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "name": "DAQSoftware",
+        "executableName": "daq-software"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "daq_software"
+            "name": "daq-unit"
           }
         },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin",
-            "linux"
+            "darwin"
           ]
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
           "config": {}
         }
       ]
