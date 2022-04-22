@@ -10,14 +10,17 @@ const { ipcRenderer } = require('electron');
 
 var popOut = false;
 var inter = 0;
+var portLen = 0; 
 
 (function($) {
     $(document).ready(function() {        
-
+        SerialPort.list().then(function(ports){
+            portLen = ports.length;
+        });
         setInterval(function () {
             SerialPort.list().then(function(ports){
-                if (inter < 1) {
-                    $("#select-port").append(`<option>${ports[0].path}</option>`);
+                if (inter < portLen) {
+                    $("#select-port").append(`<option>${ports[inter].path}</option>`);
                     inter++;
                 }
             });
