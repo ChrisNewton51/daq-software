@@ -4,83 +4,83 @@
     "description": "Software for a data aquisition unit",
     "main": "main.js",
     "scripts": {
-      "start": "electron-forge start",
-      "package-win": "electron-packager . daq-software --overwrite --asar --platform=win32 --arch=x64 --icon=assets/icon.ico --prune=true --out=applications",
-      "package-linux": "electron-packager . daq-software --icon=assets/icon.png --overwrite --asar --platform=linux --arch=x64 --prune=true --no-sandbox --out=applications",
-      "package-mac": "electron-packager . daq-software --overwrite --platform=darwin --arch=x64 --icon=assets/icon.ico --prune=true --out=applications",
-      "package": "electron-forge package",
-      "make-mac": "npx @electron-forge/cli make --platform darwin",
-      "make-linux": "npx @electron-forge/cli make --platform linux",
-      "make": "npx @electron-forge/cli make"
+        "start": "electron-forge start",
+        "package-win": "electron-packager . daq-software --overwrite --asar --platform=win32 --arch=x64 --icon=assets/icon.ico --prune=true --out=applications",
+        "package-linux": "electron-packager . daq-software --icon=assets/icon.png --overwrite --asar --platform=linux --arch=x64 --prune=true --no-sandbox --out=applications",
+        "package-mac": "electron-packager . daq-software --overwrite --platform=darwin --arch=x64 --icon=assets/icon.ico --prune=true --out=applications",
+        "package": "electron-forge package",
+        "make-mac": "npx @electron-forge/cli make --platform darwin",
+        "make-linux": "npx @electron-forge/cli make --platform linux",
+        "make": "npx @electron-forge/cli make"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/ChrisNewton51/daq-software.git"
+        "type": "git",
+        "url": "git+https://github.com/ChrisNewton51/daq-software.git"
     },
     "keywords": [
-      "daq",
-      "data",
-      "electron",
-      "current",
-      "voltage",
-      "capacitance",
-      "tesla",
-      "capacitance",
-      "inductance"
+        "daq",
+        "data",
+        "electron",
+        "current",
+        "voltage",
+        "capacitance",
+        "tesla",
+        "capacitance",
+        "inductance"
     ],
     "author": "Chris Newton",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/ChrisNewton51/daq-software/issues"
+        "url": "https://github.com/ChrisNewton51/daq-software/issues"
     },
     "homepage": "https://github.com/ChrisNewton51/daq-software#readme",
     "devDependencies": {
-      "@electron-forge/cli": "^6.0.0-beta.63",
-      "@electron-forge/maker-deb": "^6.0.0-beta.63",
-      "@electron-forge/maker-rpm": "^6.0.0-beta.63",
-      "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
-      "@electron-forge/maker-zip": "^6.0.0-beta.63",
-      "electron": "^15.2.0"
+        "@electron-forge/cli": "^6.0.0-beta.63",
+        "@electron-forge/maker-deb": "^6.0.0-beta.63",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+        "@electron-forge/maker-zip": "^6.0.0-beta.63",
+        "electron": "^15.2.0"
     },
     "dependencies": {
-      "@electron/remote": "^2.0.8",
-      "chart.js": "^3.7.1",
-      "csv-parser": "^3.0.0",
-      "csv-write-stream": "^2.0.0",
-      "csv-writer": "^1.6.0",
-      "electron-squirrel-startup": "^1.0.0",
-      "fs": "0.0.1-security",
-      "jquery": "^3.6.0",
-      "remote": "^0.2.6",
-      "serialport": "^10.4.0",
-      "system-sleep": "^1.3.7",
-      "update-electron-app": "^2.0.1"
+        "@electron/remote": "^2.0.8",
+        "chart.js": "^3.7.1",
+        "csv-parser": "^3.0.0",
+        "csv-write-stream": "^2.0.0",
+        "csv-writer": "^1.6.0",
+        "electron-packager": "^15.5.1",
+        "electron-squirrel-startup": "^1.0.0",
+        "fs": "0.0.1-security",
+        "jquery": "^3.6.0",
+        "remote": "^0.2.6",
+        "serialport": "^10.4.0",
+        "system-sleep": "^1.3.7",
+        "update-electron-app": "^2.0.1"
     },
     "config": {
-      "forge": {
-        "packagerConfig": {
-          "name": "DAQSoftware",
-          "executableName": "daq-software"
-        },
-        "makers": [
-          {
-            "name": "@electron-forge/maker-squirrel",
-            "config": {
-              "name": "daq-unit"
-            }
-          },
-          {
-            "name": "@electron-forge/maker-zip",
-            "platforms": [
-              "darwin"
+        "forge": {
+            "packagerConfig": {
+                "name": "DAQSoftware",
+                "executableName": "daq-software"
+            },
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "name": "daq-unit"
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin"
+                    ]
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {}
+                }
             ]
-          }, 
-          {
-            "name": "@electron-forge/maker-deb",
-            "config": {}
-          }
-        ]
-      }
+        }
     }
-  }
-  
+}
