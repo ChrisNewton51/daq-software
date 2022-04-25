@@ -11,7 +11,8 @@
         "package": "electron-forge package",
         "make-mac": "npx @electron-forge/cli make --platform darwin",
         "make-linux": "npx @electron-forge/cli make --platform linux",
-        "make": "npx @electron-forge/cli make"
+        "make": "npx @electron-forge/cli make",
+        "installer-mac": "electron-installer-dmg ./applications/daq-software-darwin-x64/daq-software.app daq-software-installer --overwrite"
     },
     "repository": {
         "type": "git",
@@ -43,6 +44,7 @@
         "electron": "^15.2.0"
     },
     "dependencies": {
+        "@electron-forge/maker-dmg": "^6.0.0-beta.63",
         "@electron/remote": "^2.0.8",
         "chart.js": "^3.7.1",
         "csv-parser": "^3.0.0",
@@ -60,7 +62,7 @@
     "config": {
         "forge": {
             "packagerConfig": {
-                "name": "DAQSoftware",
+                "name": "daq-oftware",
                 "executableName": "daq-software"
             },
             "makers": [
@@ -71,14 +73,11 @@
                     }
                 },
                 {
-                    "name": "@electron-forge/maker-zip",
-                    "platforms": [
-                        "darwin"
-                    ]
-                },
-                {
-                    "name": "@electron-forge/maker-deb",
-                    "config": {}
+                    "name": "@electron-forge/maker-dmg",
+                    "config": {
+                        "background": "./assets/icon.png",
+                        "format": "ULFO"
+                    }
                 }
             ]
         }
